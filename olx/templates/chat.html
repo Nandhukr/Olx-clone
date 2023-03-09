@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load static %} {% block header %} {% endblock %} {% block content %}
+{% for u in users %} {% if not u.id == 1 and not u.id == user.id %}
+{{u.first_name}} {{u.last_name}} ({{u.username}})
+
+{% endif %} {% endfor %}
+{% if not chat_id > 0 %}
+Start Chat now
+Please select a person to chat with.
+
+{% else%}
+{% for chat in chats %} {% if chat.user_from == user %}
+{{chat.message}}
+
+You {{chat.date_created|date:"M-d-Y H:i"}}
+{% else %}
+{{chat.message}}
+
+Sender {{chat.date_created|date:"M-d-Y H:i"}}
+{% endif %} {% endfor %}
+Write your message here
+SEND
+{% endif %}
+{% endblock %} {% block footer %} {% endblock %}
